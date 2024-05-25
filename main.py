@@ -5,13 +5,8 @@ import sys
 
 def main():
     wi = WebdriverInterface()
-    # wi.auth()
-
-    try:
-        wi.run_upload()
-    except KeyboardInterrupt:
-        wi.stop()
-        sys.exit(130)
+    wi.auth()
+    wi.run_upload()
 
 
 if __name__ == "__main__":
