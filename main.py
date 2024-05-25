@@ -5,7 +5,7 @@ import sys
 
 def main():
     wi = WebdriverInterface()
-    wi.auth()
+    # wi.auth()
 
     try:
         wi.run_upload()
