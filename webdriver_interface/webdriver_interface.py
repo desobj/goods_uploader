@@ -7,7 +7,7 @@ import os
 class WebdriverInterface:
 
     LOGIN_URL = "https://vk.com/"
-    URL = "https://vk.com/albums-71032788"
+    URL = "https://vk.com/albums-71032788?z=photo-71032788_390836286%2Fphotos-71032788"
 
     def __init__(self):
         self.username = os.getenv('USERNAME', 'username not defined')
@@ -26,9 +26,12 @@ class WebdriverInterface:
         return True
 
     def run_upload(self):
-        page_number = int(input('type the number of the last product: '))
-        self.driver.get(url=self.URL)
-        time.sleep(5)
+        first_page = input('input link of the first product: ')
+        last_page_number = int(input('type the number of the last product: '))
+        self.driver.get(url=first_page)
+        img_url = self.driver.find_element(By.ID, 'pv_photo').find_element(By.TAG_NAME, 'img').get_attribute('src')
+        print(img_url)
+        time.sleep(40)
 
     def stop(self):
         try:

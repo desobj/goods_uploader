@@ -1,12 +1,11 @@
 from webdriver_interface import WebdriverInterface
 
-import sys
-
 
 def main():
     wi = WebdriverInterface()
     wi.auth()
     wi.run_upload()
+    wi.stop()
 
 
 if __name__ == "__main__":
