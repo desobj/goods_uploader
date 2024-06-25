@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
 import time
 import os
 
@@ -29,8 +30,23 @@ class WebdriverInterface:
         first_page = input('input link of the first product: ')
         last_page_number = int(input('type the number of the last product: '))
         self.driver.get(url=first_page)
-        img_url = self.driver.find_element(By.ID, 'pv_photo').find_element(By.TAG_NAME, 'img').get_attribute('src')
-        print(img_url)
+        for i in range(last_page_number):
+            img = self.driver.find_element(
+                By.ID,
+                'pv_photo'
+            ).find_element(
+                By.TAG_NAME,
+                'img'
+            )
+            img_url = img.get_attribute('src')
+            print(img_url)
+            action = ActionChains(self.driver)
+            action.move_to_element(img).perform()
+            time.sleep(0.5)
+            self.driver.find_element(
+                By.ID,
+                'pv_nav_btn_right'
+            ).click()
         time.sleep(40)
 
     def stop(self):
