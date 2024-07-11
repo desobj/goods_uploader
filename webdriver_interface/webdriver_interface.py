@@ -29,8 +29,9 @@ class WebdriverInterface:
     def run_upload(self):
         first_page = input('input link of the first product: ')
         last_page_number = int(input('type the number of the last product: '))
+        prev_img_url=0
         self.driver.get(url=first_page)
-        for i in range(last_page_number):
+        for i in range(last_page_number+1):
             img = self.driver.find_element(
                 By.ID,
                 'pv_photo'
@@ -39,14 +40,11 @@ class WebdriverInterface:
                 'img'
             )
             img_url = img.get_attribute('src')
-            print(img_url)
-            action = ActionChains(self.driver)
-            action.move_to_element(img).perform()
-            time.sleep(0.5)
-            self.driver.find_element(
-                By.ID,
-                'pv_nav_btn_right'
-            ).click()
+            if img_url!=prev_img_url:
+                print(img_url)
+                prev_img_url=img_url
+            foto_element = self.driver.find_element(By.ID, 'pv_photo')
+            foto_element.click()
         time.sleep(40)
 
     def stop(self):
