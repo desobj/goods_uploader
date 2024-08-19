@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
 import time
 import os
 
@@ -29,7 +28,7 @@ class WebdriverInterface:
     def run_upload(self):
         first_page = input('input link of the first product: ')
         last_page_number = int(input('type the number of the last product: '))
-        prev_img_url=0
+        prev_img_url=''
         self.driver.get(url=first_page)
         for i in range(last_page_number+1):
             img = self.driver.find_element(
@@ -43,8 +42,7 @@ class WebdriverInterface:
             if img_url!=prev_img_url:
                 print(img_url)
                 prev_img_url=img_url
-            foto_element = self.driver.find_element(By.ID, 'pv_photo')
-            foto_element.click()
+            self.driver.find_element(By.ID, 'pv_photo').click()
         time.sleep(40)
 
     def stop(self):
